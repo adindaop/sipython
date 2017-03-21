@@ -1,1 +1,23 @@
-ini index nih
+{% load staticfiles %}
+
+<html>
+  <head>
+    <title>Pool</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>Welcome to the Poll</h1>
+        <p class="lead">This is the app where you can take a vote of choice you like</p>
+        {% for q in questions%} <!-- q namanya bebas, questions namanya samain kaya di views.py yang dalem tanda ''-->
+          <p>{{q.question_text}}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+  </body>
+</html>

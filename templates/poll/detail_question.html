@@ -1,0 +1,11 @@
+<p>{{question.question_text}}</p>
+<ol>
+  {% for choice in question.choice_set.all %}
+  <li>
+    {{choice.choice_text}}
+    {% if choice.image %}
+      <img src="{{choice.image.url}}">
+    {% endif %}
+  </li>
+  {% endfor %}
+</ol>
