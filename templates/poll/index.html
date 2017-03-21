@@ -12,7 +12,7 @@
         <h1>Welcome to the Poll</h1>
         <p class="lead">This is the app where you can take a vote of choice you like</p>
         {% for q in questions%} <!-- q namanya bebas, questions namanya samain kaya di views.py yang dalem tanda ''-->
-          <p>{{q.question_text}}</p>
+          <p><a href="{% url 'poll:detail_question' q.id%}">{{q.question_text}}</p>
         {% endfor %}
       </div>
     </div>

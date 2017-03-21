@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import Question
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .models import Question, Choice
 
 def index(request):
     context = {} #inisialisasi harus kosong
@@ -16,3 +18,16 @@ def detail_question(request, question_id):
     question = Question.objects.get(id=question_id)
     context['question'] = question
     return render(request, 'poll/detail_question.html', context)
+
+def vote(request):
+    context = {}
+    choice_id = request.POST['choice']
+    selected_choice = Choice.objects.get(id=int(choice_id))
+    selected_choice.votes += 1
+    selected_choice.save()
+    return HttpResponseRedirect(reverse('poll:results', args=(selected_choice.question.id,)))
+
+def results(request, question_id):
+    context = {}
+    question = Question.objects.get(pk=question_id)
+    return render(request, 'poll/results.html', {'question': question})
